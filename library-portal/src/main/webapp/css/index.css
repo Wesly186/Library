@@ -1,0 +1,71 @@
+body { 
+	background:#5a88ca; 
+	font:100% Helvetica, Arial, sans-serif; 
+	padding-top:50px; 
+}
+
+h1 { 
+	color:#fff; 
+	text-align:center;
+	margin-bottom:20px;
+	letter-spacing:10px;
+}
+
+#container1 { 
+	margin:0 auto;
+	width:570px; 
+	
+}
+
+#search_box .wrapper { 
+	background:#fff; 
+	border:1px solid #d28703;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.3), 0 1px #ff0; 
+	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.3), 0 1px #ff0; 
+	height:50px;
+	padding-left:10px; 
+	position:relative;
+}
+
+#search_box input,
+#search_box input:focus { border:none; color:#333; outline:none; font:bold 24px Helvetica, Arial, sans-serif; margin:12px 0; width:510px; }
+#search_box button {
+	border:0px;
+	background:white;
+	cursor:pointer;/*光标呈现一只手的样式*/
+	height:45px; 
+	width:45px;
+	position:absolute; 
+	right:2px; 
+	top:2px; 
+}
+
+#container2{
+	margin:0 auto;
+	margin-top:50px;
+	width:90%;
+	height:700px;
+	background:white;
+}
+
+#title{
+	margin-top:30px;
+	line-height: 1.5em;
+    overflow: hidden;
+    font-weight: 700;
+    font-family: arial,"microsoft yahei";
+    font-size: 16px;
+}
+
+.book_list {
+	border: 1px solid #eee; 
+	width: 220px; 
+	height: 300px; 
+	float: left; 
+	margin-right: 17px; 
+	padding-top:15px;
+	position: relative; 
+	text-align:center;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.library.manage.mapper.TbBookMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.library.manage.pojo.TbBook" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+    <result column="borrowed_num" property="borrowedNum" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.library.manage.pojo.TbBook" extends="BaseResultMap" >
+    <result column="intro" property="intro" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="getRestBookNum" resultType="int" parameterType="long" >
+	SELECT
+		(
+			tb_book.total_num - tb_book.borrowed_num - (
+				SELECT
+					count(*)
+				FROM
+					tb_appointment_record
+				WHERE
+					tb_appointment_record.bid = #{bid}
+				AND tb_appointment_record.borrowed = 0
+				AND tb_appointment_record.expire_time &lt; CurDate()
+			)
+		) restNum
+	FROM
+		tb_book
+	WHERE
+		tb_book.id = #{bid}
+  </select>
+  
+  <select id="searchBook" resultMap="ResultMapWithBLOBs" parameterType="string" >
+	SELECT
+		*
+	FROM
+		tb_book
+    <if test="value!=null and value!=''">
+        where tb_book.title like '%${value}%' or tb_book.intro like '%${value}%'
+    </if>
+  </select>
+</mapper>

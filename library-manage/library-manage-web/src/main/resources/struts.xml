@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.action.extension" value="do,," />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="20971520" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+
+	<package name="page" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.library.manage.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor name="permissionInterceptor"
+				class="com.library.manage.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor name="refreshTokenInterceptor"
+				class="com.library.manage.interceptor.RefreshTokenInterceptor">
+			</interceptor>
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="refreshTokenInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="refuse">/WEB-INF/jsp/refuse.jsp</result>
+		</global-results>
+		<action name="index" class="com.library.manage.controller.PageAction"
+			method="showIndex">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		<action name="welcome" class="com.library.manage.controller.PageAction"
+			method="showWelcome">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/welcome.jsp</result>
+		</action>
+		<action name="bookAdd" class="com.library.manage.controller.PageAction"
+			method="showBookAdd">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookAdd.jsp</result>
+		</action>
+		<action name="bookList" class="com.library.manage.controller.PageAction"
+			method="showBookList">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookList.jsp</result>
+		</action>
+		<action name="bookEdit" class="com.library.manage.controller.PageAction"
+			method="showBookEdit">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookEdit.jsp</result>
+		</action>
+		<action name="bookCat" class="com.library.manage.controller.PageAction"
+			method="showBookCat">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookCat.jsp</result>
+		</action>
+		<action name="bookBorrow" class="com.library.manage.controller.PageAction"
+			method="showBookBorrow">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookBorrow.jsp</result>
+		</action>
+		<action name="bookReturn" class="com.library.manage.controller.PageAction"
+			method="showBookReturn">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/bookReturn.jsp</result>
+		</action>
+		<action name="pay" class="com.library.manage.controller.PageAction"
+			method="showPay">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success">/WEB-INF/jsp/pay.jsp</result>
+		</action>
+	</package>
+
+	<package name="user" namespace="/user" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.library.manage.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor name="permissionInterceptor"
+				class="com.library.manage.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor name="refreshTokenInterceptor"
+				class="com.library.manage.interceptor.RefreshTokenInterceptor">
+			</interceptor>
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="refreshTokenInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="refuse">/WEB-INF/jsp/refuse.jsp</result>
+		</global-results>
+		<action name="logout" class="com.library.manage.controller.UserAction"
+			method="logout">
+			<interceptor-ref name="customStack"></interceptor-ref>
+		</action>
+		<action name="checkUsername" class="com.library.manage.controller.UserAction"
+			method="checkUsername">
+			<interceptor-ref name="customStack"></interceptor-ref>
+		</action>
+	</package>
+
+	<package name="upload" namespace="/file" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.library.manage.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor name="permissionInterceptor"
+				class="com.library.manage.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor name="refreshTokenInterceptor"
+				class="com.library.manage.interceptor.RefreshTokenInterceptor">
+			</interceptor>
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="refreshTokenInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="refuse">/WEB-INF/jsp/refuse.jsp</result>
+		</global-results>
+		<action name="upload" class="com.library.manage.controller.FileUploadAction"
+			method="pictureUpload">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="book" namespace="/book" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.library.manage.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor name="permissionInterceptor"
+				class="com.library.manage.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor name="refreshTokenInterceptor"
+				class="com.library.manage.interceptor.RefreshTokenInterceptor">
+			</interceptor>
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="refreshTokenInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="refuse">/WEB-INF/jsp/refuse.jsp</result>
+		</global-results>
+		<action name="bookAddSubmit" class="com.library.manage.controller.BookAction"
+			method="addBook">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookDelete" class="com.library.manage.controller.BookAction"
+			method="deleteBook">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookUpdate" class="com.library.manage.controller.BookAction"
+			method="updateBook">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookList" class="com.library.manage.controller.BookAction"
+			method="getBookList">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">euResult</param>
+			</result>
+		</action>
+		<action name="bookBorrow" class="com.library.manage.controller.BookAction"
+			method="borrowBook">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookReturn" class="com.library.manage.controller.BookAction"
+			method="returnBook">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="checkBookName" class="com.library.manage.controller.BookAction"
+			method="checkBookName">
+			<interceptor-ref name="customStack"></interceptor-ref>
+		</action>
+	</package>
+
+	<package name="bookCat" namespace="/bookCat" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.library.manage.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor name="permissionInterceptor"
+				class="com.library.manage.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor name="refreshTokenInterceptor"
+				class="com.library.manage.interceptor.RefreshTokenInterceptor">
+			</interceptor>
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+				<interceptor-ref name="refreshTokenInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="refuse">/WEB-INF/jsp/refuse.jsp</result>
+		</global-results>
+		<action name="bookCatList" class="com.library.manage.controller.BookCatAction"
+			method="getBookCatList">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">treeResult</param>
+			</result>
+		</action>
+		<action name="bookCatAdd" class="com.library.manage.controller.BookCatAction"
+			method="createBookCat">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookCatDelete" class="com.library.manage.controller.BookCatAction"
+			method="deleteBookCat">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookCatUpdate" class="com.library.manage.controller.BookCatAction"
+			method="updateBookCat">
+			<interceptor-ref name="customStack"></interceptor-ref>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+</struts>
